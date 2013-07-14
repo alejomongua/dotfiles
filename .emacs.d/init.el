@@ -48,6 +48,7 @@
  '(vertical-border ((t nil)))
 )
 
+(normal-erase-is-backspace-mode 0) ;; Borra normalmente el backspace
 ;; ------------
 ;; -- Macros --
 ;; ------------
@@ -75,3 +76,15 @@
 (require 'jade-mode)    
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; ------------------------------
+;; -- Emmet Mode configuration --
+;; ------------------------------
+
+(add-to-list 'load-path "~/.emacs.d/emmet-mode") ;; https://github.com/smihica/emmet-mode
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;indent 2 spaces.
+(add-hook 'emmet-mode-hook '(lambda ()
+    (local-set-key (kbd "RET") 'newline-and-indent)))
